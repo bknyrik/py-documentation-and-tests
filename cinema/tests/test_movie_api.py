@@ -125,11 +125,11 @@ class AuthorizedMovieApiTests(TestCase):
             query_params={"title": "Test movie"}
         )
 
-        serializer_1 = MovieDetailSerializer(movie_1)
-        serializer_2 = MovieDetailSerializer(movie_2)
+        serializer_not_for_filter = MovieDetailSerializer(movie_1)
+        serializer_for_filter = MovieDetailSerializer(movie_2)
 
-        self.assertNotIn(serializer_1.data, response.data)
-        self.assertIn(serializer_2.data, response.data)
+        self.assertNotIn(serializer_not_for_filter.data, response.data)
+        self.assertIn(serializer_for_filter.data, response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_filter_movie_by_genres(self) -> None:
